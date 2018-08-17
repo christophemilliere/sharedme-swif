@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var ui_shareTextView: UITextView!
+    @IBOutlet weak var ui_errorLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,5 +23,15 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func shareTypedText() {
+        let typedText: String = ui_shareTextView.text
+        if typedText.count > 0  {
+            let shareViewController = UIActivityViewController(activityItems: [typedText], applicationActivities: nil)
+            present(shareViewController, animated: true, completion: nil)
+            ui_errorLabel.text = ""
+        } else {
+            ui_errorLabel.text = "Aucun message n'a été entré"
+        }
+    }
 }
 
